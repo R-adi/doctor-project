@@ -6,7 +6,7 @@ const Faqlist = () => {
   return (
     <div>
       <ul className='mt-[38px]'>
-        {faqs.map((item,index)=><Faqitem item={item} index={index}></Faqitem>)}
+        {faqs.map((item,index)=><Faqitem item={item} key={index} index={index}></Faqitem>)}
       </ul>
     </div>
   )
