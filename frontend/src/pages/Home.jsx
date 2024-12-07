@@ -15,6 +15,8 @@ import avatari from "../assets/images/avatar-icon.png";
 import Doctorlist from "../components/Doctors/Doctorlist";
 import faqImg from '../assets/images/faq-img.png';
 import Faqlist from "../components/Faq/Faqlist" ;
+import Testimonial from "../components/Testimonial/Testimonial"
+
 
 const Home = () => {
   return (
@@ -248,6 +250,19 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </section>
+
+
+      {/* testimonial */}
+
+      <section>
+      <div className="xl:w-[470px] mx-auto">
+            <h2 className="heading text-center">What our Patients say</h2>
+            <p className="text_para text-center">
+             
+            </p>
+          </div>
+          <Testimonial></Testimonial>
       </section>
     </>
   );

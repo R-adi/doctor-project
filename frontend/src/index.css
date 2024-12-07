@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer base{
     section{
         @apply py-[75px]
@@ -29,6 +31,14 @@
     }
     .hero_section{
         @apply bg-[url('./assets/images/hero-bg.png')] bg-no-repeat bg-center bg-cover
+    }
+
+    .form_lable{
+        @apply text-smallTextColor font-semibold text-[16px] mb-2
+    }
+
+    .form_input{
+        @apply w-full px-4 py-3 border border-solid focus:outline-none text-[16px] leading-7 text-headingColor cursor-pointer rounded-md
     }
 }
 
