@@ -25,7 +25,7 @@ const DoctorDet1 = () => {
                   Surgeon
                 </span>
                 <h3 className="text-gray-700 leading-9 mt-3 font-bold">
-                  Muhibir rahmaan
+                  Muhibir rahman
                 </h3>
                 <div className="flex items-center gap-[6px] ">
                   <span className="flex items-center gap-[6px] leading-5 lg:text-[16px] font-semibold text-gray-700 lg:leading-7 text-[14px]">
