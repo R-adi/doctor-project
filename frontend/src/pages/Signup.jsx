@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import signupImg from "../assets/images/signup.gif";
 import avatar from "../assets/images/doctor-img01.png";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
+import uploadCloudinary from "../utils/uploadCloudinary";
+import { BASE_URL } from "../config";
+import {toast} from 'react-toastify'
+import HashLoader from 'react-spinners/HashLoader'
 
 const Signup = () => {
   const [selectfile, setselectfile] = useState(null);
   const [previousurl, setpreviousurl] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const [formdata, setformdata] = useState({
     name: "",
@@ -13,19 +18,62 @@ const Signup = () => {
     password: "",
     photo: "",
     gender: "",
-    role: "patient",
+    role: "",
   });
+
+const navigate=useNavigate()
+
   const handleinput = (e) => {
     setformdata({ ...formdata, [e.target.name]: e.target.value });
   };
 
   const handlefile = async (event) => {
     const file = event.target.files[0];
-    console.log(file);
+
+    const data=await uploadCloudinary(file)
+    console.log(data);
+    setpreviousurl(data.url)
+    setselectfile(data.url)
+    setformdata({...formdata,photo:data.url})
+    
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    console.log(formdata)
+    console.log(formdata.role)
+    if (!formdata.role) {
+      toast.error("Please select a role");
+      return;
+    }
+    setLoading(true)
+
+    try {
+      const res =await fetch(`${BASE_URL}/register`,{
+        method:"POST",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(formdata)
+      })
+
+      const {message}=await res.json()
+      
+      if(!res.ok){
+        throw new Error(message)
+      }
+setLoading(false)
+toast.success(message)
+
+if (formdata.role == "doctor") {            
+  navigate("/login");
+} else if (formdata.role == "patient") {
+  navigate("/login");
+} 
+
+    } catch (error) {
+      toast.error(error.message)
+      setLoading(false)
+    }
+   
   };
 
   return (
@@ -93,8 +141,9 @@ const Signup = () => {
                     name="role"
                     value={formdata.role}
                     onChange={handleinput}
+                    required
                     className="text-gray-700 font-semibold text-[15px] px-4 py-3 focus:outline-none"
-                  >
+                  ><option value="">Select a role</option>
                     <option value="patient">Patient</option>
                     <option value="doctor">Doctor</option>
                   </select>
@@ -110,7 +159,7 @@ const Signup = () => {
                     value={formdata.gender}
                     onChange={handleinput}
                     className="text-gray-700 font-semibold text-[15px] px-4 py-3 focus:outline-none"
-                  >
+                  > <option value="">Select a Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
@@ -119,9 +168,9 @@ const Signup = () => {
               </div>
 
               <div className="mb-5 flex items-center gap-3">
-                <figure className="w-[60px] h-[60px] flex items-center rounded-full justify-center border-solid border-2 ">
-                  <img src={avatar} alt="" className="w-full rounded-full" />
-                </figure>
+            {  selectfile &&  <figure className="w-[60px] h-[60px] flex items-center rounded-full justify-center border-solid border-2 ">
+                  <img src={previousurl} alt="" className="w-full rounded-full" />
+                </figure>}
 
                 <div className="relative h-[50px] w-[130px]">
                   <input
@@ -136,14 +185,14 @@ const Signup = () => {
                     htmlFor="customerfile"
                     className="absolute w-full h-full top-0 left-0 flex items-center rounded-lg px-[0.75rem] py-[0.375rem] text-[15px] overflow-hidden leading-6 bg-[#0066ff46] text-headingColor font-semibold cursor-pointer"
                   >
-                    Upload Photo
+                    Upload Photo 
                   </label>
                 </div>
               </div>
 
               <div className="mt-7">
-                <button type="submit" className="btn w-full px-4 py-3">
-                  Sign Up
+                <button disabled={loading&&true} type="submit" className="btn w-full px-4 py-3">
+                 {loading?<HashLoader size={35} color="white"></HashLoader>:'Sign Up'}
                 </button>
 
                 <p className="mt-5 text-gray-600 text-center">
