@@ -68,3 +68,21 @@ export const getSAllDoctor = async (req, res) => {
     res.status(404).json({ message: "Doctors not found" });
   }
 };
+
+
+export const getDoctorProfile=async (req,res) => {
+  const userId=req.userId
+
+  try {
+    const doctor=await Doctor.findById(userId)
+
+if(!doctorr){
+  return res.status(404).json({succes:false,message:"User not found"})
+}
+ const {password,...rest}=doctor._doc
+  res.status(200).json({succes:true,message:"profile nfo is getting ",data:{...rest}})
+
+  } catch (error) {
+    res.status(500).json({succes:false,message:"something went wrong"}) 
+  }
+}
