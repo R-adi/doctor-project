@@ -6,7 +6,7 @@ import Doctor from "../models/DoctorSchema.js"
 export const getallReviews=async (req,res) => {
     try {
         const reviews=await Review.find({})
-        res.status(200).json({succes:true, message:"succesful"})
+        res.status(200).json({succes:true, message:"succesfull"})
     } catch (error) {
         res.status(404).json({succes:false, message:"Not found"})
     }

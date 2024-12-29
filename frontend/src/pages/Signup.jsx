@@ -16,7 +16,7 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
-    photo: "",
+    photo: selectfile,
     gender: "",
     role: "",
   });

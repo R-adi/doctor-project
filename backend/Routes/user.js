@@ -10,7 +10,7 @@ router.get("/",authenticate,restrict(["admin"]),getSAllUser);
 router.put("/:id",authenticate,restrict(["patient"]),updateUser);
 router.delete("/:id",authenticate,restrict(["patient"]),deleteUser);
 router.get("/profile/me",authenticate,restrict(["patient"]),getUserProfile);
-router.get("appointments/my-appointment",authenticate,restrict(["patient"]),getMyAppointment);
+router.get("/appointments/my-appointment",authenticate,restrict(["patient"]),getMyAppointment);
 
 
 

@@ -14,7 +14,7 @@ const generateToken = (user) => {
 };
 
 export const register = async (req, res) => {
-  const { email, password, name, role, photo, gender } = req.body;
+  const { email, password, name, role, photo, gender,bloodtype } = req.body;
   try {
     let user = null;
 
@@ -34,11 +34,13 @@ export const register = async (req, res) => {
     if (role == "patient") {
       user = new User({
         name,
+        phone,
         email,
         password: hashPassword,
         photo,
         gender,
         role,
+        bloodtype
       });
     }
 

@@ -12,7 +12,7 @@ const navlinks = [
     display: "Home",
   },
   {
-    path: "/doctors",
+    path: "/doctor",
     display: "Doctors",
   },
   {
@@ -61,7 +61,7 @@ const Header = () => {
           </div>
 
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>
-            {" "}
+            
             {/*menu */}
             <ul className="menu flex items-center gap-[2.7rem]">
               {navlinks.map((link, index) => (
@@ -84,7 +84,7 @@ const Header = () => {
           <div className="flex items-center gap-2">
             {token && user ? (
               <div>
-                <Link to={`${role=='doctor'?'/doctors/profile/me':'/user/profile/me'}`}>
+                <Link to={`${role=='doctor'?'/doctor/profile/me':'/user/profile/me'}`}>
                   <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
                     <img src={user?.photo} className="w=full rounded-full"></img>
                   </figure>

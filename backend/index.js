@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(cookieParser());
 //app.use(cors(cosrOption));
 app.use('/',authRoute)
-app.use('/users',userroute)
+app.use('/user',userroute)
 app.use('/doctor',doctorroute)
 app.use('/reviews',reviewroute)
 
