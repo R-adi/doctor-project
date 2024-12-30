@@ -1,6 +1,6 @@
 import React from "react";
 
-const Doctorabout = () => {
+const Doctorabout = ({name,about,qualifications,experiences}) => {
   return (
     <>
       <div>
