@@ -1,11 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
+ import { BASE_URL,token } from "../../config";
+import uploadImageToCloudinary from "../../utils/uploadCloudinary";
+import { toast } from "react-toastify";
 
-const Profile = () => {
+const Profile = ({Doctordata}) => {
   const [FormData, setFormData] = useState({
     name: "",
     email: "",
+    password:"",
     phone: "",
     bio: "",
     gender: "",
@@ -22,15 +26,63 @@ const Profile = () => {
     photo: null,
   });
 
+  useEffect(() => {
+ setFormData({
+    name:Doctordata?.name,
+    email: Doctordata?.email,
+    
+    phone: Doctordata?.phone,
+    bio: Doctordata?.bio,
+    gender: Doctordata?.gender,
+    specialization: Doctordata?.specialization,
+    ticketprice: Doctordata?.ticketprice,
+    qualifications: Doctordata?.qualifications,
+    experiences: Doctordata?.experiences,
+    timeSlots: Doctordata?.timeSlots,
+    about:  Doctordata?.about,
+    photo:  Doctordata?.photo,
+ })
+  
+  }, [Doctordata])
+  
+
   const handleInput = (e) => {
     setFormData({ ...FormData, [e.target.name]: e.target.value });
   };
 
-  const handlefile = (e) => {};
+  const handlefile =async event => {
+    const file=event.target.files[0]
+    const data =await uploadImageToCloudinary(file)
+    console.log(data)
+    setFormData({...FormData,photo:data?.url})
+  };
 
   const updateprofile = async (e) => {
     e.preventDefault();
+
+    try {
+        const res = await fetch(`${BASE_URL}/doctor/${Doctordata._id}`,{
+            method:'PUT',
+            headers:{
+                'content-type':'application/json',
+                Authorization:`Bearer ${token}`
+            },
+            body:JSON.stringify(FormData)
+        })
+
+const result=await res.json()
+
+if(!res.ok){
+    throw Error(result.message)
+}
+toast.success(result.message)
+
+    } catch (error) {
+      toast.error(error.message)  
+    }
   };
+
+
   //to use reusable component
   const addItem = (key, item) => {
     setFormData((prevFormData) => ({
@@ -81,7 +133,11 @@ const Profile = () => {
     });
   };
 
- 
+  const addTimeSlots = (e) => {
+    e.preventDefault();
+
+    addItem("timeSlots", { day: "", startingTime: "", endingTime: "" });
+  };
 
   const deleteQualification = (e, index) => {
     e.preventDefault();
@@ -93,12 +149,21 @@ const Profile = () => {
     deleteItem("experiences", index);
   };
 
+  const deleteTimeSlot = (e, index) => {
+    e.preventDefault();
+    deleteItem("timeSlots", index);
+  };
+
   const handleQualification = (event, index) => {
     handleReusableInput("qualifications", index, event);
   };
 
   const handleExperiences = (event, index) => {
     handleReusableInput("experiences", index, event);
+  };
+
+  const handleTimeSlots = (event, index) => {
+    handleReusableInput("timeSlots", index, event);
   };
 
   return (
@@ -352,6 +417,7 @@ const Profile = () => {
                       name="day"
                       value={item.day}
                       className="form_input py-3"
+                      onChange={(e) => handleTimeSlots(e, index)}
                     >
                       <option value="saturday">Saturday</option>
                       <option value="sunday">Sunday</option>
@@ -369,6 +435,7 @@ const Profile = () => {
                       name="startingTime"
                       value={item.startingTime}
                       className="form_input"
+                      onChange={(e) => handleTimeSlots(e, index)}
                     />
                   </div>
 
@@ -379,11 +446,12 @@ const Profile = () => {
                       name="endingTime"
                       value={item.endingTime}
                       className="form_input"
+                      onChange={(e) => handleTimeSlots(e, index)}
                     />
                   </div>
 
                   <div className="flex items-center">
-                    <button className="bg-red-600 p-2 text-white cursor-pointer rounded-full  mt-6">
+                    <button  onClick={(e) => deleteTimeSlot(e, index)} className="bg-red-600 p-2 text-white cursor-pointer rounded-full  mt-6">
                       <AiOutlineDelete></AiOutlineDelete>
                     </button>
                   </div>
@@ -392,7 +460,7 @@ const Profile = () => {
             </div>
           ))}
 
-          <button className="bg-black py-2 px-5 rounded-md text-[18px] text-white cursor-pointer h-fit">
+          <button onClick={addTimeSlots} className="bg-black py-2 px-5 rounded-md text-[18px] text-white cursor-pointer h-fit">
             Add Timeslots
           </button>
         </div>
