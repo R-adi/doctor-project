@@ -36,7 +36,30 @@ const Testimonial = () => {
               <img src={patientAvatar} alt="" />
               <div className="">
                 <h4 className="text-[18px] font-semibold leading-[30px]">
-                  Muhibar Rahman
+                  Aditya Deshmukh
+                </h4>
+                <div className="flex items-center gap-[2px]">
+                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
+                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
+                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
+                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
+                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
+                </div>
+              </div>
+            </div>
+            <p className="text-[16px] leading-7 mt-4 font-[400] text-gray-700">
+              I have taken medical services from them. They treat so well and
+              they are providing the best medical services
+            </p>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="py-[30px] px-5 rounded-3">
+            <div className="flex items-center gap-[13px]">
+              <img src={patientAvatar} alt="" />
+              <div className="">
+                <h4 className="text-[18px] font-semibold leading-[30px]">
+                 Aditya Deshmukh
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
@@ -59,7 +82,7 @@ const Testimonial = () => {
               <img src={patientAvatar} alt="" />
               <div className="">
                 <h4 className="text-[18px] font-semibold leading-[30px]">
-                  Muhibar Rahman
+                  Salman Khan
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
@@ -71,7 +94,7 @@ const Testimonial = () => {
               </div>
             </div>
             <p className="text-[16px] leading-7 mt-4 font-[400] text-gray-700">
-              Ihave taken medical services from them. They treat so well and
+              I have taken medical services from them. They treat so well and
               they are providing the best medical services
             </p>
           </div>
@@ -82,30 +105,7 @@ const Testimonial = () => {
               <img src={patientAvatar} alt="" />
               <div className="">
                 <h4 className="text-[18px] font-semibold leading-[30px]">
-                  Muhibar Rahman
-                </h4>
-                <div className="flex items-center gap-[2px]">
-                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
-                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
-                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
-                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
-                  <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>
-                </div>
-              </div>
-            </div>
-            <p className="text-[16px] leading-7 mt-4 font-[400] text-gray-700">
-              Ihave taken medical services from them. They treat so well and
-              they are providing the best medical services
-            </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="py-[30px] px-5 rounded-3">
-            <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
-              <div className="">
-                <h4 className="text-[18px] font-semibold leading-[30px]">
-                  Muhibar Rahman
+           Akshay Kumar
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellow-500 h-5 w-[18px]"></HiStar>

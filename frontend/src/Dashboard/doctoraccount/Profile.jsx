@@ -247,9 +247,12 @@ toast.success(result.message)
               >
                 <option value="">Select</option>
                 <option value="surgeon">Surgeon</option>
-                <option value="psychatrist">Psychatrist</option>
-                <option value="dentist">Dentist</option>
-                <option value="physician">Physician</option>
+                <option value="Psychatrist">Psychatrist</option>
+                <option value="Dentist">Dentist</option>
+                <option value="Physician">Physician</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Dermatologist">Dermatologist</option>
+                <option value="Orthologist">Orthologist</option>
                 <option value="other">Other</option>
               </select>
             </div>
