@@ -1,14 +1,49 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { useParams } from "react-router-dom";
+import { BASE_URL, token } from "../../config";
+import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
 
 const Feedbackform = () => {
   const [rating, setrating] = useState(0);
   const [hover, sethover] = useState(0);
-  const [review, setreview] = useState("");
+  const [reviewText, setreviewText] = useState("")
+  const [loading, setloading] = useState(false);
 
-  const handlesubmit = async e =>{
+  const { id } = useParams();
+
+  const handlesubmit = async (e) => {
     e.preventDefault();
-  }
+    setloading(true);
+    try {
+      if (!rating || !reviewText) {
+        setloading(false);
+        return toast.error("rating & review fields are required");
+      }
+
+      const res = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ rating, reviewText }),
+      });
+
+      const result = await res.json();
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      setloading(false);
+      toast.success(result.message);
+
+    } catch (error) {
+      setloading(false);
+      toast.error(error.message);
+    }
+  };
 
   return (
     <form action="">
@@ -52,11 +87,17 @@ const Feedbackform = () => {
         <textarea
           className="border border-solid focus:outline py-3 w-full px-4 outline-gray-500"
           placeholder="write here"
-          onChange={(e)=>setreview(e.target.value)}
+          onChange={(e) => setreviewText(e.target.value)}
           rows="5"
         ></textarea>
       </div>
-      <button className="btn" type="submit" onClick={handlesubmit}>Submit feedback</button>
+      <button className="btn" type="submit" onClick={handlesubmit}>
+        {loading ? (
+          <HashLoader size={25} color="white"></HashLoader>
+        ) : (
+          "Submit feedback"
+        )}
+      </button>
     </form>
   );
 };

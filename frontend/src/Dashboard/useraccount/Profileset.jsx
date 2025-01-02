@@ -4,6 +4,8 @@ import uploadCloudinary from "../../utils/uploadCloudinary.js";
 import { BASE_URL, token } from "../../config";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
+import { useContext } from "react";
+import { authContext } from "../../context/AuthContext.jsx";
 
 const Profileset = ({ user }) => {
   const [selectfile, setselectfile] = useState(null);
@@ -21,6 +23,7 @@ const Profileset = ({ user }) => {
   });
 
   const navigate = useNavigate();
+  const { dispatch } = useContext(authContext); 
 
   useEffect(() => {
     setformdata({
@@ -65,13 +68,20 @@ const Profileset = ({ user }) => {
         body: JSON.stringify(formdata),
       });
 
-      const { message } = await res.json();
+      const  response  = await res.json();
 
       if (!res.ok) {
-        throw new Error(message);
+        throw new Error(response.message);
       }
       setLoading(false);
-      toast.success(message);
+      toast.success(response.message);
+
+      
+
+      dispatch({
+        type: "UPDATE_USER",
+        payload: response.updatedUser, // Assuming the API response contains the updated user data
+      });
 
     navigate("/user/profile/me")
     } catch (error) {
@@ -79,6 +89,8 @@ const Profileset = ({ user }) => {
       setLoading(false);
     }
   };
+
+ 
 
   return (
     <div className="mt-10">
@@ -120,7 +132,7 @@ const Profileset = ({ user }) => {
           />
         </div>
 
-        <div className="mb-5">
+        {/* <div className="mb-5">                  // check after project is done
           <input
             type="password"
             placeholder="password"
@@ -130,7 +142,7 @@ const Profileset = ({ user }) => {
             className="w-full px-4 py-3 border-b border-solid leading-7 text-headingColor cursor-pointer focus:outline-none"
             
           />
-        </div>
+        </div> */}
 
         <div className="mb-5">
           <input

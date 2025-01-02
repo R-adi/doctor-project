@@ -1,13 +1,12 @@
-import {
-  createContext,
-  useEffect,
-  useReducer,
-} from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const initialstate = {
-  user: localStorage.getItem('user')!=undefined? JSON.parse(localStorage.getItem('user')):null,
-  role: localStorage.getItem('role') || null,
-  token: localStorage.getItem('token') || null,
+  user:
+    localStorage.getItem("user") != undefined
+      ? JSON.parse(localStorage.getItem("user"))
+      : null,
+  role: localStorage.getItem("role") || null,
+  token: localStorage.getItem("token") || null,
 };
 
 export const authContext = createContext(initialstate);
@@ -35,6 +34,12 @@ const authReducer = (state, action) => {
         token: null,
       };
 
+    case "UPDATE_USER":
+      return {
+        ...state,
+        user: { ...state.user, ...action.payload }, // Merge updated properties
+      };
+
     default:
       return state;
       break;
@@ -44,11 +49,10 @@ const authReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialstate);
   useEffect(() => {
-    localStorage.setItem('user',JSON.stringify(state.user))
-    localStorage.setItem('token',state.token)
-    localStorage.setItem('role',state.role)
-  }, [state])
-  
+    localStorage.setItem("user", JSON.stringify(state.user));
+    localStorage.setItem("token", state.token);
+    localStorage.setItem("role", state.role);
+  }, [state]);
 
   return (
     <authContext.Provider

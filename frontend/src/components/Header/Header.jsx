@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { useEffect, useState, useContext } from "react";
 import logo from "../../assets/images/logo.png";
-import userImg from "../../assets/images/avatar-icon.png";
 import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
 import { authContext } from "../../context/AuthContext";
@@ -12,7 +11,7 @@ const navlinks = [
     display: "Home",
   },
   {
-    path: "/doctor",
+    path: "/doctors",
     display: "Doctors",
   },
   {
@@ -83,13 +82,12 @@ const Header = () => {
 
           <div className="flex items-center gap-2">
             {token && user ? (
-              <div>
-                <Link to={`${role=='doctor'?'/doctor/profile/me':'/user/profile/me'}`}>
+              <div className="h-[80px]">
+                <Link to={`${role=='doctor'?'/doctors/profile/me':'/user/profile/me'}`}>
                   <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
-                    <img src={user?.photo} className="w=full rounded-full"></img>
+                    <img src={user?.photo} className="w-full rounded-full"></img>
                   </figure>
-
-                  <h2>{user?.name}</h2>
+                  <h2 className="font-semibold mb-3">{user?.name}</h2>
                 </Link>
               </div>
             ) : (

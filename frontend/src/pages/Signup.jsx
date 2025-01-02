@@ -58,7 +58,9 @@ const navigate=useNavigate()
       const {message}=await res.json()
       
       if(!res.ok){
+        console.log("isuee is here")
         throw new Error(message)
+        
       }
 setLoading(false)
 toast.success(message)
@@ -72,6 +74,7 @@ if (formdata.role == "doctor") {
     } catch (error) {
       toast.error(error.message)
       setLoading(false)
+      console.log("i am causing issue")
     }
    
   };

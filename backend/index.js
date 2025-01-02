@@ -33,7 +33,7 @@ app.use(cookieParser());
 //app.use(cors(cosrOption));
 app.use('/',authRoute)
 app.use('/user',userroute)
-app.use('/doctor',doctorroute)
+app.use('/doctors',doctorroute)
 app.use('/reviews',reviewroute)
 
 app.listen(port,()=>{

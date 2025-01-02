@@ -12,7 +12,7 @@ import Appointments from "./Appointments";
 
 const Dashboard = () => {
   const { data, loading, error } = useGetprofile(
-    `${BASE_URL}/doctor/profile/me`
+    `${BASE_URL}/doctors/profile/me`
   );
   const [tab, settab] = useState("overview");
 
