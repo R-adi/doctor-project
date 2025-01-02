@@ -14,7 +14,7 @@ const Profile = ({Doctordata}) => {
     bio: "",
     gender: "",
     specialization: "",
-    ticketprice: 0,
+    ticketPrice: 0,
     qualifications: [
       { startingDate: "", endingDate: "", degree: "", university: "" },
     ],
@@ -259,9 +259,9 @@ toast.success(result.message)
               <input
                 type="number"
                 placeholder="100"
-                name="ticketprice"
+                name="ticketPrice"
                 onChange={handleInput}
-                value={FormData.ticketprice}
+                value={FormData.ticketPrice}
                 className="form_input"
               />
             </div>

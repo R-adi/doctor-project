@@ -7,6 +7,7 @@ import authRoute from './Routes/auth.js'
 import userroute from "./Routes/user.js";
 import doctorroute from "./Routes/doctor.js"
 import reviewroute from "./Routes/review.js"
+import bookingRoute from "./Routes/booking.js"
 dotenv.config()
 
 const app=express()
@@ -35,6 +36,8 @@ app.use('/',authRoute)
 app.use('/user',userroute)
 app.use('/doctors',doctorroute)
 app.use('/reviews',reviewroute)
+app.use('/bookings',bookingRoute)
+
 
 app.listen(port,()=>{
     console.log("server is running on "+ port);

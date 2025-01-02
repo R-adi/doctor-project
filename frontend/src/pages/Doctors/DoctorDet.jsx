@@ -95,7 +95,6 @@ const DoctorDet = () => {
               }
             </div>
           </div>
-
           <div>
             <Sidepanal doctorId={doctor._id} ticketPrice={ticketPrice} timeSlots={timeSlots}></Sidepanal>
           </div>

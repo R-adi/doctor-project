@@ -9,6 +9,7 @@ import DoctorDet from '../pages/Doctors/DoctorDet'
 import MyAccount from '../Dashboard/useraccount/MyAccount'
 import Dashboard from '../Dashboard/doctoraccount/Dashboard'
 import Protectedroute from './Protectedroute'
+import CheckoutSucces from '../pages/Doctors/CheckoutSucces'
 
 import {Routes, Route} from 'react-router-dom'
 
@@ -25,6 +26,7 @@ const Routers = () => {
     <Route path='/services' element={<Services/>}></Route>
     <Route path='/user/profile/me' element={<Protectedroute allowedRoles={['patient']}><MyAccount></MyAccount></Protectedroute>}></Route>
     <Route path='/doctors/profile/me' element={<Protectedroute allowedRoles={['doctor']}><Dashboard></Dashboard></Protectedroute>}></Route>
+    <Route path='/checkout' element={<CheckoutSucces></CheckoutSucces>}></Route>
    </Routes>
   )
 }
