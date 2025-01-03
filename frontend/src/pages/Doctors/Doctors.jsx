@@ -12,7 +12,7 @@ const Doctors = () => {
 
   const handleSearch = () => {
     setquery(query.trim());
-    console.log("handle search");
+    console.log("handle search");       // no need to use actully
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Doctors = () => {
     data: doctors,
     loading,
     error,
-  } = useFetchdata(`${BASE_URL}/doctors?.query=${query}`);
+  } = useFetchdata(`${BASE_URL}/doctors?query=${deBounceQuery}`);
 
   return (
     <>
@@ -61,7 +61,7 @@ const Doctors = () => {
           {!loading && !error && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:grid-cols-3 ">
               {doctors.map((doctor) => (
-                <Doctorcard key={doctor.id} doctor={doctor}></Doctorcard>
+                <Doctorcard key={doctor._id} doctor={doctor}></Doctorcard>
               ))}
             </div>
           )}
